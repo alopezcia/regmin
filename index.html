@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" type="image/ico" href="media/favicon.ico"/>
+    <title>Registro Minutos</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+    <div id="myApp">
+        <h1>Registro Minutos</h1>
+        <blockquote>Hoy: {{ dia.toLocaleString() }}</blockquote>
+        <button v-on:click="accionClicked">{{ accion }}</button>
+        <hr>
+        <blockquote>Inicio: {{ principio ? principio.toLocaleTimeString() : ' ' }}</blockquote>
+        <hr>
+        <blockquote>Final: {{ final ? final.toLocaleTimeString() : ' ' }}</blockquote>
+        <hr>
+        <blockquote>Diferencia: {{ diferencia }} min.</blockquote>
+        <hr>
+        <blockquote>Acumulados: {{ acumulado }} min.</blockquote>
+        <button v-on:click="acumularClicked">Guardar</button>
+        <hr>
+        <ul>
+            <li v-for="({ fecha, final, inicio, diferencia }, index) in entradas">
+                <span>{{ index + 1 }} - {{ fecha }}</span>
+                <blockquote>{{ final }} - {{ inicio }} = {{ diferencia}}</blockquote>
+            </li>
+        </ul>
+    </div>
+
+    <script src="app.js"></script>
+
+    <!-- Añadimos cobertura para el Service Worker-->
+    <script>
+        var url = window.location.href;
+        var swLocation = '/regmin/sw.js';
+        if( navigator.serviceWorker ){
+          if( url.includes('localhost')){
+            swLocation='/sw.js';
+          }
+          navigator.serviceWorker.register(swLocation);
+        }
+      </script>
+  
+</body>
+</html>

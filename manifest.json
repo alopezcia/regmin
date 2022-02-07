@@ -1,0 +1,38 @@
+{
+    "short_name": "RegMin",
+    "name": "Registro Minutos",    
+    "icons": [{
+        "src": "media/icons/icons8-reloj-16.png",
+        "type": "image/png",
+        "sizes": "16x16"
+      }, {
+        "src": "media/icons/icons8-reloj-24.png",
+        "type": "image/png",
+        "sizes": "24x24"
+      }, {
+        "src": "media/icons/icons8-reloj-32.png",
+        "type": "image/png",
+        "sizes": "32x32"
+      }, {
+        "src": "media/icons/icons8-reloj-64.png",
+        "type": "image/png",
+        "sizes": "64x64"
+      }, {
+        "src": "media/icons/icons8-reloj-128.png",
+        "type": "image/png",
+        "sizes": "128x128"
+      }, {
+        "src": "media/icons/icons8-reloj-256.png",
+        "type": "image/png",
+        "sizes": "256x256"
+      }, {
+        "src": "media/icons/icons8-reloj-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }        
+    ],
+    "start_url": "index.html",
+    "background_color": "#3498db",
+    "theme_color": "#3498db",
+    "display": "fullscreen"
+}
