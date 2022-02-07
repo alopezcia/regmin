@@ -23,6 +23,7 @@
         <hr>
         <blockquote>Acumulados: {{ acumulado }} min.</blockquote>
         <button v-on:click="acumularClicked">Guardar</button>
+        <button v-on:click="resetearClicked">Resetear</button>
         <hr>
         <ul>
             <li v-for="({ fecha, final, inicio, diferencia }, index) in entradas">
