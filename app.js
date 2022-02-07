@@ -11,9 +11,21 @@ const app = Vue.createApp({
         }
     },
     mounted(){
-        this.accion =  localStorage.getItem("Accion") ? localStorage.getItem("Accion") : 'Inicio'
-        this.principio =  localStorage.getItem("Principio") ? new Date(localStorage.getItem("Principio")) : undefined
-        this.final = localStorage.getItem("Final") ? new Date(localStorage.getItem("Final")) : undefined
+        if( localStorage.getItem("Accion") && localStorage.getItem("Accion") !== undefined )
+            this.accion =  localStorage.getItem("Accion")
+        else
+            this.accion = 'Inicio'
+            
+        if( localStorage.getItem("Principio") && localStorage.getItem("Principio") !== undefined )    
+            this.principio = new Date(localStorage.getItem("Principio")) 
+        else 
+            this.principio = undefined
+            
+        if( localStorage.getItem("Final") && localStorage.getItem("Final") !== undefined )
+            this.final =  new Date(localStorage.getItem("Final")) 
+        else
+            this.final = undefined
+
         this.diferencia = localStorage.getItem("Diferencia") ? parseInt(localStorage.getItem("Diferencia")) : 0
         this.acumulado = localStorage.getItem("Acumulado") ? parseInt(localStorage.getItem("Acumulado")) : 0
         this.entradas = localStorage.getItem("Entradas") ? JSON.parse(localStorage.getItem("Entradas")) : []
@@ -30,7 +42,7 @@ const app = Vue.createApp({
 
             } else {
                 this.final = new Date()
-                localStorage.setItem("Final", this.Final);
+                localStorage.setItem("Final", this.final);
                 this.diferencia = Math.round(Math.abs(this.final - this.principio)/60000)
                 localStorage.setItem("Diferencia", this.diferencia);
                 this.acumulado += this.diferencia
@@ -51,17 +63,26 @@ const app = Vue.createApp({
                 this.entradas.push(e)
                 localStorage.setItem("Entradas", JSON.stringify(this.entradas))
                 this.diferencia=0
-                localStorage.setItem("Diferencia", this.diferencia);
+                localStorage.removeItem("Diferencia");
                 this.principio=undefined
-                localStorage.setItem("Principio", this.principio);
+                localStorage.removeItem("Principio");
                 this.final=undefined
-                localStorage.setItem("Final", this.Final);
+                localStorage.removeItem("Final" );
             }
         },
         resetearClicked(){
-            this.entradas = []
             localStorage.removeItem("Entradas")
-
+            localStorage.removeItem("Principio");
+            localStorage.removeItem("Final");
+            localStorage.removeItem("Diferencia");
+            localStorage.removeItem("Accion");
+            localStorage.removeItem("Acumulado");
+            this.accion = 'Inicio'
+            this.principio = undefined
+            this.final = undefined
+            this.diferencia = 0
+            this.acumulado = 0
+            this.entradas = []
         }
     }
 })
